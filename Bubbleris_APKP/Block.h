@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include <map>
-#include "Position.h"
-#include "Colors.h"
+#include "position.h"
+#include "colors.h"
 
 class Block
 {
