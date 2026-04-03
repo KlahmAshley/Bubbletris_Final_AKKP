@@ -27,8 +27,8 @@ private:
     void UpdateScore(int linesCleared, int moveDownPoints);
     Grid grid;
     std::vector<Block> blocks;
-    Block currentBlock;
-    Block nextBlock;
+    //Block currentBlock;
+   // Block nextBlock;
     Sound rotateSound;
     Sound clearSound;
 };
