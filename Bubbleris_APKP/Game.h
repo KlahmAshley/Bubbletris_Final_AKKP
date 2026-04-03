@@ -2,6 +2,8 @@
 #include "Grid.h"
 #include "Blocks.cpp"
 
+using namespace std;
+
 class Game
 {
 public:
@@ -17,8 +19,8 @@ public:
 private:
     void MoveBlockLeft();
     void MoveBlockRight();
-    Block GetRandomBlock();
-    std::vector<Block> GetAllBlocks();
+    Block* GetRandomBlock(); //pointer
+    vector<Block*> GetAllBlocks();
     bool IsBlockOutside();
     void RotateBlock();
     void LockBlock();
@@ -26,9 +28,9 @@ private:
     void Reset();
     void UpdateScore(int linesCleared, int moveDownPoints);
     Grid grid;
-    std::vector<Block> blocks;
-    Block currentBlock;
-    Block nextBlock;
+    vector<Block*> blocks;
+    Block* currentBlock;
+    Block* nextBlock;
     Sound rotateSound;
     Sound clearSound;
 };
