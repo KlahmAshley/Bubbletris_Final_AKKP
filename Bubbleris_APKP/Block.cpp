@@ -1,6 +1,6 @@
 #include "Block.h"
 
-Block::Block()
+Block::Block()//constrcutor 
 {
     cellSize = 30;
     rotationState = 0;
@@ -54,3 +54,8 @@ void Block::UndoRotation()
         rotationState = cells.size() - 1;
     }
 }
+
+Block::~Block()//destructor
+{
+}   
+

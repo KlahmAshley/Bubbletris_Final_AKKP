@@ -8,6 +8,7 @@ class Block
 {
 public:
     Block();
+    virtual ~Block();
     void Draw(int offsetX, int offsetY);
     void Move(int rows, int columns);
     std::vector<Position> GetCellPositions();
@@ -23,3 +24,4 @@ private:
     int rowOffset;
     int columnOffset;
 };
+

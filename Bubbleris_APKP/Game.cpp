@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <random>
 
-Game::Game()
+Game::Game() //constrcutor 
 {
     grid = Grid();
     blocks = GetAllBlocks();
@@ -10,13 +10,13 @@ Game::Game()
     gameOver = false;
     score = 0;
     InitAudioDevice();
-    music = LoadMusicStream("Sounds/music.mp3");
+   // music = LoadMusicStream("MusicLoop.wav");
     PlayMusicStream(music);
-    rotateSound = LoadSound("Sounds/rotate.mp3");
-    clearSound = LoadSound("Sounds/clear.mp3");
+    rotateSound = LoadSound("RotatePop.wav");
+    clearSound = LoadSound("ClearPop.mp3");
 }
 
-Game::~Game()
+Game::~Game() //destructor
 {
     delete currentBlock;
     delete nextBlock;
@@ -44,31 +44,13 @@ Block* Game::GetRandomBlock()
     return block;
 }
 
-//std::vector<Block*> Game::GetAllBlocks()
-//{
-//    return { IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock() };
-//}
+
 
 std::vector<Block*> Game::GetAllBlocks()
 {
     return { new IBlock(), new JBlock(), new LBlock(), new OBlock(), new SBlock(), new TBlock(), new ZBlock() };
 }
 
-
-/*
-std::vector<Block*> Game::GetAllBlocks()
-{
-    std::vector<Block*> list;
-    list.push_back(new IBlock());
-    list.push_back(new JBlock());
-    list.push_back(new LBlock());
-    list.push_back(new OBlock());
-    list.push_back(new SBlock());
-    list.push_back(new TBlock());
-    list.push_back(new ZBlock());
-    return list;
-}
-*/
 
 void Game::Draw()
 {

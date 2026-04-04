@@ -2,11 +2,11 @@
 #include <iostream>
 #include "Colors.h"
 
-Grid::Grid()
+Grid::Grid()//constrcutor 
 {
-    numRows = 20;
-    numCols = 10;
-    cellSize = 30;
+    numRows = 20; //og 20
+    numCols = 10; //og 10
+    cellSize = 30; 
     Initialize();
     colors = GetCellColors();
 }

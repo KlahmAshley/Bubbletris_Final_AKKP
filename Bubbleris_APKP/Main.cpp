@@ -21,7 +21,10 @@ int main()
     InitWindow(500, 620, "raylib Tetris");
     SetTargetFPS(60);
 
-    Font font = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
+   // Font font = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
+	Font font = LoadFont("BubbleFont.ttf");
+
+
 
     Game game = Game();
 
@@ -36,7 +39,8 @@ int main()
 
         BeginDrawing();
         ClearBackground(darkBlue);
-        DrawTextEx(font, "Score", { 365, 15 }, 38, 2, WHITE);
+        //DrawTextEx(font, "Score", { 365, 15 }, 38, 2, WHITE);
+		DrawTextEx(font, "Score", { 370, 15 }, 38, 2, WHITE);
         DrawTextEx(font, "Next", { 370, 175 }, 38, 2, WHITE);
         if (game.gameOver)
         {
