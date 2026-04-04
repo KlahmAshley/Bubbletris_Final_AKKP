@@ -2,6 +2,8 @@
 #include "Game.h"
 #include "Colors.h"
 #include <iostream>
+#include <fstream>
+using namespace std;
 
 double lastUpdateTime = 0;
 
@@ -18,6 +20,8 @@ bool EventTriggered(double interval)
 
 int main()
 {
+    ofstream leaderboard;
+    
     InitWindow(500, 620, "raylib Tetris");
     SetTargetFPS(60);
 
@@ -35,6 +39,7 @@ int main()
         if (EventTriggered(0.2))
         {
             game.MoveBlockDown();
+
         }
 
         BeginDrawing();
@@ -45,6 +50,8 @@ int main()
         if (game.gameOver)
         {
             DrawTextEx(font, "GAME OVER", { 320, 450 }, 38, 2, WHITE);
+            
+            
         }
         DrawRectangleRounded({ 320, 55, 170, 60 }, 0.3, 6, purple); //score box
 
@@ -52,6 +59,8 @@ int main()
         char scoreText[10];
         sprintf_s(scoreText, "%d", game.score);
         Vector2 textSize = MeasureTextEx(font, scoreText, 38, 2);
+        
+
 
 
         DrawTextEx(font, scoreText, { 320 + (170 - textSize.x) / 2, 65 }, 38, 2, WHITE);
@@ -59,6 +68,9 @@ int main()
         game.Draw();
         EndDrawing();
     }
-
+    leaderboard.open("leaderboard.txt", ios::app);
+    leaderboard << "Score: " << game.score;
+    leaderboard.close();
+    
     CloseWindow();
 }
