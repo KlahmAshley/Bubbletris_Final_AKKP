@@ -14,6 +14,8 @@ Game::Game() //constrcutor
     PlayMusicStream(music);
     rotateSound = LoadSound("RotatePop.wav");
     clearSound = LoadSound("ClearPop.mp3");
+   // Image bog = LoadImage("Bog.png");
+    Texture2D bog = LoadTexture("Bog.png");
 }
 
 Game::~Game() //destructor
@@ -26,6 +28,7 @@ Game::~Game() //destructor
     }
     blocks.clear();
 
+    
     UnloadSound(rotateSound);
     UnloadSound(clearSound);
     UnloadMusicStream(music);
@@ -55,6 +58,7 @@ std::vector<Block*> Game::GetAllBlocks()
 void Game::Draw()
 {
     grid.Draw();
+	DrawTexture(bog, 0, 0, WHITE);
     if (currentBlock) currentBlock ->Draw(11, 11);
     switch (nextBlock->id)
     {

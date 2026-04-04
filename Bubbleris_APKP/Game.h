@@ -33,4 +33,5 @@ private:
     Block* nextBlock;
     Sound rotateSound;
     Sound clearSound;
+    Texture2D bog = LoadTexture("Bog.png");
 };
