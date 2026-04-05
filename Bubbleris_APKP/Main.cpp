@@ -71,6 +71,10 @@ int main()
     leaderboard.open("leaderboard.txt", ios::app);
     leaderboard << "Score: " << game.score;
     leaderboard.close();
-    
+    //I had crazy deja vu and felt like this needs to be released or deleted 
+    // //in some way after the game is done? that could be wrong but i feel anxious not noting this
+
+
+
     CloseWindow();
 }
