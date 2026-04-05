@@ -22,25 +22,25 @@ int main()
 {
     ofstream leaderboard;
     
-    InitWindow(500, 620, "raylib Tetris");
+    //drawing the game window + setting 
+    InitWindow(500, 620, "BUBBLETRIS - AKKP");
     SetTargetFPS(60);
-
-   // Font font = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
+    // Font font = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
 	Font font = LoadFont("BubbleFont.ttf");
-
-
 
     Game game = Game();
 
-    while (WindowShouldClose() == false)
+    while (!WindowShouldClose())
     {
         UpdateMusicStream(game.music);
         game.HandleInput();
+        //
         if (EventTriggered(0.2))
         {
             game.MoveBlockDown();
 
         }
+
 
         BeginDrawing();
         ClearBackground(darkBlue);
@@ -73,6 +73,7 @@ int main()
     leaderboard.close();
     //I had crazy deja vu and felt like this needs to be released or deleted 
     // //in some way after the game is done? that could be wrong but i feel anxious not noting this
+    //the leaderboard is getting saved to a .txt file that will be accessible through the menu and stores past scores, so i don't think it has to get deleted?
 
 
 

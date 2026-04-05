@@ -3,25 +3,31 @@
 #include <map>
 #include "Position.h"
 #include "Colors.h"
+using namespace std;
 
 class Block
 {
 public:
-    Block();
-    virtual ~Block();
-    void Draw(int offsetX, int offsetY);
-    void Move(int rows, int columns);
-    std::vector<Position> GetCellPositions();
+    Block(); //constructor
+    virtual ~Block(); //destructor
+
+    void Draw(int offsetX, int offsetY); //drawing the bubble groups
+    void Move(int rows, int columns); //moving the block
+    vector <Position> GetCellPositions(); //getting the position of each cell
+
+    //functions dealing with block rotation
     void Rotate();
     void UndoRotation();
-    int id;
-    std::map<int, std::vector<Position>> cells;
+
+    int bubbleID; //id for the type of bubble group
+    map <int, vector<Position>> cells; //array of cells
 
 private:
-    int cellSize;
-    int rotationState;
-    std::vector<Color> colors;
-    int rowOffset;
+    int cellSize; //size of the cell
+    int rotationState; //tracking the current rotation state a block is in
+    vector <Color> colors; //colours!
+    //offsets for spaces within the grid
+    int rowOffset; 
     int columnOffset;
 };
 

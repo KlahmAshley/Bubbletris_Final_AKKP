@@ -1,26 +1,33 @@
 #include "Block.h"
 #include "Position.h"
 
-class LBlock : public Block
+
+//Note to discuss with ashley: can we change the cpp file names themselves? ex. change "Blocks.cpp" to "Bubbles.cpp"
+//Not sure if it would break everything so not touching it yet
+
+//File for storing the data of each bubble group in order to access them and draw when needed
+class LBubbles : public Block
 {
 public:
-    LBlock()
+    LBubbles()
     {
-        id = 1;
+        //bubbleID stores the ID number of each bubble group for ease of calling
+        bubbleID = 1;
+        //Storing the shape of each bubble group in an array  
         cells[0] = { Position(0, 2), Position(1, 0), Position(1, 1), Position(1, 2) };
         cells[1] = { Position(0, 1), Position(1, 1), Position(2, 1), Position(2, 2) };
         cells[2] = { Position(1, 0), Position(1, 1), Position(1, 2), Position(2, 0) };
         cells[3] = { Position(0, 0), Position(0, 1), Position(1, 1), Position(2, 1) };
-        Move(0, 3);
+        Move(0, 3); //NOTE FOR SUNDAY KATIE DOUBLE CHECK THE TUTORIAL VIDEO TO BE ABLE TO DESCRIBE WHAT EXACTLY MOVE DOES
     }
 };
 
-class JBlock : public Block
+class JBubbles : public Block
 {
 public:
-    JBlock()
+    JBubbles()
     {
-        id = 2;
+        bubbleID = 2;
         cells[0] = { Position(0, 0), Position(1, 0), Position(1, 1), Position(1, 2) };
         cells[1] = { Position(0, 1), Position(0, 2), Position(1, 1), Position(2, 1) };
         cells[2] = { Position(1, 0), Position(1, 1), Position(1, 2), Position(2, 2) };
@@ -29,12 +36,12 @@ public:
     }
 };
 
-class IBlock : public Block
+class IBubbles : public Block
 {
 public:
-    IBlock()
+    IBubbles()
     {
-        id = 3;
+        bubbleID = 3;
         cells[0] = { Position(1, 0), Position(1, 1), Position(1, 2), Position(1, 3) };
         cells[1] = { Position(0, 2), Position(1, 2), Position(2, 2), Position(3, 2) };
         cells[2] = { Position(2, 0), Position(2, 1), Position(2, 2), Position(2, 3) };
@@ -43,23 +50,23 @@ public:
     }
 };
 
-class OBlock : public Block
+class OBubbles : public Block
 {
 public:
-    OBlock()
+    OBubbles()
     {
-        id = 4;
+        bubbleID = 4;
         cells[0] = { Position(0, 0), Position(0, 1), Position(1, 0), Position(1, 1) };
         Move(0, 4);
     }
 };
 
-class SBlock : public Block
+class SBubbles : public Block
 {
 public:
-    SBlock()
+    SBubbles()
     {
-        id = 5;
+        bubbleID = 5;
         cells[0] = { Position(0, 1), Position(0, 2), Position(1, 0), Position(1, 1) };
         cells[1] = { Position(0, 1), Position(1, 1), Position(1, 2), Position(2, 2) };
         cells[2] = { Position(1, 1), Position(1, 2), Position(2, 0), Position(2, 1) };
@@ -68,12 +75,12 @@ public:
     }
 };
 
-class TBlock : public Block
+class TBubbles : public Block
 {
 public:
-    TBlock()
+    TBubbles()
     {
-        id = 6;
+        bubbleID = 6;
         cells[0] = { Position(0, 1), Position(1, 0), Position(1, 1), Position(1, 2) };
         cells[1] = { Position(0, 1), Position(1, 1), Position(1, 2), Position(2, 1) };
         cells[2] = { Position(1, 0), Position(1, 1), Position(1, 2), Position(2, 1) };
@@ -82,12 +89,12 @@ public:
     }
 };
 
-class ZBlock : public Block
+class ZBubbles : public Block
 {
 public:
-    ZBlock()
+    ZBubbles()
     {
-        id = 7;
+        bubbleID = 7;
         cells[0] = { Position(0, 0), Position(0, 1), Position(1, 1), Position(1, 2) };
         cells[1] = { Position(0, 2), Position(1, 1), Position(1, 2), Position(2, 1) };
         cells[2] = { Position(1, 0), Position(1, 1), Position(2, 1), Position(2, 2) };

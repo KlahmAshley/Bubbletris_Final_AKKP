@@ -1,7 +1,11 @@
 #include "Game.h"
 #include <random>
+#include <vector>
 
-Game::Game() //constrcutor 
+using namespace std;
+
+
+Game::Game() //constructor 
 {
     grid = Grid();
     blocks = GetAllBlocks();
@@ -49,9 +53,9 @@ Block* Game::GetRandomBlock()
 
 
 
-std::vector<Block*> Game::GetAllBlocks()
+vector <Block*> Game::GetAllBlocks()
 {
-    return { new IBlock(), new JBlock(), new LBlock(), new OBlock(), new SBlock(), new TBlock(), new ZBlock() };
+    return { new IBubbles(), new JBubbles(), new LBubbles(), new OBubbles(), new SBubbles(), new TBubbles(), new ZBubbles() };
 }
 
 
@@ -60,7 +64,7 @@ void Game::Draw()
     grid.Draw();
 	DrawTexture(bog, 0, 0, WHITE);
     if (currentBlock) currentBlock ->Draw(11, 11);
-    switch (nextBlock->id)
+    switch (nextBlock->bubbleID)
     {
     case 3:
         nextBlock->Draw(255, 290);
@@ -82,6 +86,7 @@ void Game::HandleInput()
         gameOver = false;
         Reset();
     }
+
     switch (keyPressed)
     {
     case KEY_LEFT:
@@ -139,7 +144,7 @@ void Game::MoveBlockDown()
 
 bool Game::IsBlockOutside()
 {
-    std::vector<Position> tiles = currentBlock->GetCellPositions();
+    vector<Position> tiles = currentBlock->GetCellPositions();
     for (Position item : tiles)
     {
         if (grid.IsCellOutside(item.row, item.column))
@@ -168,10 +173,10 @@ void Game::RotateBlock()
 
 void Game::LockBlock()
 {
-    std::vector<Position> tiles = currentBlock->GetCellPositions();
+    vector<Position> tiles = currentBlock->GetCellPositions();
     for (Position item : tiles)
     {
-        grid.grid[item.row][item.column] = currentBlock->id;
+        grid.grid[item.row][item.column] = currentBlock->bubbleID;
     }
 
     //delete old current and move next in array
@@ -179,12 +184,14 @@ void Game::LockBlock()
     currentBlock = nextBlock;
     nextBlock = nullptr;
 
+    //if block doesn't fit in the grid(aka overflow) then end the game
     if (BlockFits() == false)
     {
         gameOver = true;
     }
     nextBlock = GetRandomBlock();
     int rowsCleared = grid.ClearFullRows();
+    //rewarding player with points and sound effects for clearing a row
     if (rowsCleared > 0)
     {
         PlaySound(clearSound);
@@ -205,6 +212,7 @@ bool Game::BlockFits()
     return true;
 }
 
+//resetting game
 void Game::Reset()
 {
     grid.Initialize();
@@ -212,7 +220,8 @@ void Game::Reset()
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
     score = 0;
-
+    
+    //deleting allocated block memory to clear up space
     for (Block* b : blocks)
     {
         delete b;
@@ -223,6 +232,7 @@ void Game::Reset()
 
 void Game::UpdateScore(int linesCleared, int moveDownPoints)
 {
+    //switch case for determining how many points a player is given for clearing lines
     switch (linesCleared)
     {
     case 1:
@@ -234,9 +244,13 @@ void Game::UpdateScore(int linesCleared, int moveDownPoints)
     case 3:
         score += 500;
         break;
+    case 4: //for some reason there wasn't a case 4? so i added it
+        score += 700;
+        break;
     default:
         break;
     }
 
+    //adding extra to the score depending on how many points from moving down you obtained
     score += moveDownPoints;
 }

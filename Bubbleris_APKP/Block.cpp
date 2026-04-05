@@ -1,9 +1,13 @@
 #include "Block.h"
+#include <vector>
+using namespace std;
 
-Block::Block()//constrcutor 
+Block::Block()//constructor 
 {
+
     cellSize = 30;
     rotationState = 0;
+    //
     colors = GetCellColors();
     rowOffset = 0;
     columnOffset = 0;
@@ -11,11 +15,14 @@ Block::Block()//constrcutor
 
 void Block::Draw(int offsetX, int offsetY)
 {
-    std::vector<Position> tiles = GetCellPositions();
+    //initializing an array of tiles to draw the bubble group in
+    vector <Position> tiles = GetCellPositions();
     for (Position item : tiles)
     {
-       // DrawRectangle(item.column * cellSize + offsetX, item.row * cellSize + offsetY, cellSize - 1, cellSize - 1, colors[id]); the falling things
-        DrawCircleGradient(item.column * cellSize + offsetX + 14, item.row * cellSize + offsetY, cellSize - 14, colors[id], SKYBLUE);
+        //DrawRectangle(item.column * cellSize + offsetX, item.row * cellSize + offsetY, cellSize - 1, cellSize - 1, colors[id]); the falling things4
+
+        //Drawing the bubbles! 
+        DrawCircleGradient(item.column * cellSize + offsetX + 14, item.row * cellSize + offsetY, cellSize - 14, colors[bubbleID], SKYBLUE);
     }
 }
 
@@ -25,10 +32,10 @@ void Block::Move(int rows, int columns)
     columnOffset += columns;
 }
 
-std::vector<Position> Block::GetCellPositions()
+vector <Position> Block::GetCellPositions()
 {
-    std::vector<Position> tiles = cells[rotationState];
-    std::vector<Position> movedTiles;
+    vector <Position> tiles = cells[rotationState];
+    vector <Position> movedTiles;
     for (Position item : tiles)
     {
         Position newPos = Position(item.row + rowOffset, item.column + columnOffset);
@@ -37,9 +44,12 @@ std::vector<Position> Block::GetCellPositions()
     return movedTiles;
 }
 
+
+
 void Block::Rotate()
 {
-    rotationState++;
+
+    rotationState++; //when function is called, rotate cell
     if (rotationState == (int)cells.size())
     {
         rotationState = 0;
@@ -57,5 +67,6 @@ void Block::UndoRotation()
 
 Block::~Block()//destructor
 {
+
 }   
 
