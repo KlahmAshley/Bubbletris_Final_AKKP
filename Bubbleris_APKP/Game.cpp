@@ -14,11 +14,9 @@ Game::Game() //constructor
     gameOver = false;
     score = 0;
     InitAudioDevice();
-   // music = LoadMusicStream("MusicLoop.wav");
     PlayMusicStream(music);
     rotateSound = LoadSound("RotatePop.wav");
     clearSound = LoadSound("ClearPop.mp3");
-   // Image bog = LoadImage("Bog.png");
     Texture2D bog = LoadTexture("Bog.png");
 }
 
@@ -179,7 +177,7 @@ void Game::LockBlock()
         grid.grid[item.row][item.column] = currentBlock->bubbleID;
     }
 
-    //delete old current and move next in array
+    //delete old current and move to next block in the array
     delete currentBlock;
     currentBlock = nextBlock;
     nextBlock = nullptr;

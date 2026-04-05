@@ -19,8 +19,6 @@ void Block::Draw(int offsetX, int offsetY)
     vector <Position> tiles = GetCellPositions();
     for (Position item : tiles)
     {
-        //DrawRectangle(item.column * cellSize + offsetX, item.row * cellSize + offsetY, cellSize - 1, cellSize - 1, colors[id]); the falling things4
-
         //Drawing the bubbles! 
         DrawCircleGradient(item.column * cellSize + offsetX + 14, item.row * cellSize + offsetY, cellSize - 14, colors[bubbleID], SKYBLUE);
     }

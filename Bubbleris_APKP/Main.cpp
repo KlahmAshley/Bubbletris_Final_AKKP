@@ -25,7 +25,6 @@ int main()
     //drawing the game window + setting 
     InitWindow(500, 620, "BUBBLETRIS - AKKP");
     SetTargetFPS(60);
-    // Font font = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
 	Font font = LoadFont("BubbleFont.ttf");
 
     Game game = Game();
@@ -41,28 +40,21 @@ int main()
 
         }
 
-
         BeginDrawing();
         ClearBackground(darkBlue);
-        //DrawTextEx(font, "Score", { 365, 15 }, 38, 2, WHITE);
 		DrawTextEx(font, "Score", { 370, 15 }, 38, 2, WHITE);
         DrawTextEx(font, "Next", { 370, 175 }, 38, 2, WHITE);
         if (game.gameOver)
         {
-            DrawTextEx(font, "GAME OVER", { 320, 450 }, 38, 2, WHITE);
-            
-            
+            DrawTextEx(font, "GAME OVER", { 320, 400 }, 38, 2, WHITE);
+           
         }
         DrawRectangleRounded({ 320, 55, 170, 60 }, 0.3, 6, purple); //score box
-
 
         char scoreText[10];
         sprintf_s(scoreText, "%d", game.score);
         Vector2 textSize = MeasureTextEx(font, scoreText, 38, 2);
         
-
-
-
         DrawTextEx(font, scoreText, { 320 + (170 - textSize.x) / 2, 65 }, 38, 2, WHITE);
         DrawRectangleRounded({ 320, 215, 170, 180 }, 0.3, 6, lightBlue);
         game.Draw();
@@ -71,11 +63,6 @@ int main()
     leaderboard.open("leaderboard.txt", ios::app);
     leaderboard << "Score: " << game.score;
     leaderboard.close();
-    //I had crazy deja vu and felt like this needs to be released or deleted 
-    // //in some way after the game is done? that could be wrong but i feel anxious not noting this
-    //the leaderboard is getting saved to a .txt file that will be accessible through the menu and stores past scores, so i don't think it has to get deleted?
-
-
 
     CloseWindow();
 }
