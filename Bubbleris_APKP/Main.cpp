@@ -3,9 +3,13 @@
 #include "Colors.h"
 #include <iostream>
 #include <fstream>
+#include <vector>
+
 using namespace std;
 
 double lastUpdateTime = 0;
+static bool canRecordScore = true;
+bool readyToDraw = false;
 
 bool EventTriggered(double interval)
 {
@@ -21,7 +25,9 @@ bool EventTriggered(double interval)
 int main()
 {
     ofstream leaderboard;
+    vector<int> lbScores;
     
+    bool swapped;
     //drawing the game window + setting 
     InitWindow(500, 620, "BUBBLETRIS - AKKP");
     SetTargetFPS(60);
@@ -44,11 +50,7 @@ int main()
         ClearBackground(darkBlue);
 		DrawTextEx(font, "Score", { 370, 15 }, 38, 2, WHITE);
         DrawTextEx(font, "Next", { 370, 175 }, 38, 2, WHITE);
-        if (game.gameOver)
-        {
-            DrawTextEx(font, "GAME OVER", { 320, 400 }, 38, 2, WHITE);
-           
-        }
+  
         DrawRectangleRounded({ 320, 55, 170, 60 }, 0.3, 6, purple); //score box
 
         char scoreText[10];
@@ -58,11 +60,83 @@ int main()
         DrawTextEx(font, scoreText, { 320 + (170 - textSize.x) / 2, 65 }, 38, 2, WHITE);
         DrawRectangleRounded({ 320, 215, 170, 180 }, 0.3, 6, lightBlue);
         game.Draw();
+        
+        if (game.gameOver && canRecordScore) {
+            cout << "testing game over yay wow yay score is being recorded\n";
+            leaderboard.open("leaderboard.txt", ios::app);
+            leaderboard << game.score << "\n";
+            leaderboard.close();
+
+            ifstream file("leaderboard.txt");
+            if (!file.is_open()) {
+                cerr << "Error: Unable to open file.";
+                return 1;
+            }
+            int j;
+
+            while (file >> j) {
+                lbScores.push_back(j);
+            }
+            int temp;
+            int n = lbScores.size();
+            for (int j = 0; j < n - 1; j++) {
+                int min = lbScores.at(j);
+                temp = j;
+                for (int i = j + 1; i < n; i++) {
+                    if (min < lbScores.at(i)) {
+                        min = lbScores.at(i);
+                        temp = i;
+                    }                    
+                }
+                swap(lbScores.at(j), lbScores.at(temp));
+            }
+
+            if (lbScores.size() > 5) {
+                lbScores.erase(lbScores.begin() + 5, lbScores.end());
+            }
+
+
+            readyToDraw = true;
+            if (readyToDraw) {
+                
+            }
+           
+
+            for (int i = 0; i < lbScores.size(); i++) {
+                cout << "Score: " << lbScores[i] << "\n";
+            }
+            
+            
+            file.close();
+            canRecordScore = false;
+            
+        }
+        if (game.gameOver && readyToDraw)
+        {
+            DrawRectangleRounded({ 75, 50, 350, 500 }, 0.3, 6, cyan);
+
+            DrawRectangleRounded({ 85, 60, 330, 480 }, 0.3, 6, red);
+            DrawTextEx(font, "GAME OVER!", { 175, 75 }, 38, 2, WHITE);
+            DrawTextEx(font, "LEADERBOARD:", { 155, 115 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#1 : %i", lbScores[0]), {155, 150}, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#2 : %i", lbScores[1]), { 155, 200 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#3 : %i", lbScores[2]), { 155, 250 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#4 : %i", lbScores[3]), { 155, 300 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#5 : %i", lbScores[4]), { 155, 350 }, 38, 2, WHITE);
+
+            
+
+        }
+        if (!game.gameOver) {
+            canRecordScore = true;
+            lbScores.clear();
+            readyToDraw = false;
+        }
+        
         EndDrawing();
     }
-    leaderboard.open("leaderboard.txt", ios::app);
-    leaderboard << "Score: " << game.score;
-    leaderboard.close();
+    
+    
 
     CloseWindow();
 }
