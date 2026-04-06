@@ -2,12 +2,11 @@
 #include <vector>
 using namespace std;
 
-Block::Block()//constructor 
+Block::Block()//block constructor 
 {
-
+    //Creating the bubble blocks 
     cellSize = 30;
     rotationState = 0;
-    //
     colors = GetCellColors();
     rowOffset = 0;
     columnOffset = 0;
@@ -24,7 +23,7 @@ void Block::Draw(int offsetX, int offsetY)
     }
 }
 
-void Block::Move(int rows, int columns)
+void Block::Move(int rows, int columns)  //Making way to move
 {
     rowOffset += rows;
     columnOffset += columns;
@@ -44,7 +43,7 @@ vector <Position> Block::GetCellPositions()
 
 
 
-void Block::Rotate()
+void Block::Rotate() //Defining function to rotate 
 {
 
     rotationState++; //when function is called, rotate cell
@@ -54,7 +53,7 @@ void Block::Rotate()
     }
 }
 
-void Block::UndoRotation()
+void Block::UndoRotation() //Defining function to undo rotation
 {
     rotationState--;
     if (rotationState == -1)

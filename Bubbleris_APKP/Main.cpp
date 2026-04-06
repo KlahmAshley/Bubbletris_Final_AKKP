@@ -4,14 +4,13 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
 using namespace std;
 
 double lastUpdateTime = 0;
 static bool canRecordScore = true;
 bool readyToDraw = false;
 
-bool EventTriggered(double interval)
+bool EventTriggered(double interval) //keeping track of time 
 {
     double currentTime = GetTime();
     if (currentTime - lastUpdateTime >= interval)
@@ -28,7 +27,7 @@ int main()
     vector<int> lbScores;
     
     bool swapped;
-    //drawing the game window + setting 
+    //drawing the game window, setting target FPS and loading font
     InitWindow(500, 620, "BUBBLETRIS - AKKP");
     SetTargetFPS(60);
 	Font font = LoadFont("BubbleFont.ttf");
@@ -37,16 +36,17 @@ int main()
 
     while (!WindowShouldClose())
     {
-        UpdateMusicStream(game.music);
+       // UpdateMusicStream(game.music);
         game.HandleInput();
         //
-        if (EventTriggered(0.2))
+        if (EventTriggered(0.4)) //Time between moving block down over time 
         {
             game.MoveBlockDown();
 
         }
 
-        BeginDrawing();
+        //starts drawing - mainly the visual things like background, shapes and text 
+        BeginDrawing(); 
         ClearBackground(darkBlue);
 		DrawTextEx(font, "Score", { 370, 15 }, 38, 2, WHITE);
         DrawTextEx(font, "Next", { 370, 175 }, 38, 2, WHITE);
@@ -59,21 +59,23 @@ int main()
         
         DrawTextEx(font, scoreText, { 320 + (170 - textSize.x) / 2, 65 }, 38, 2, WHITE);
         DrawRectangleRounded({ 320, 215, 170, 180 }, 0.3, 6, lightBlue);
-        game.Draw();
+        game.Draw(); //Begins to draw the game 
         
-        if (game.gameOver && canRecordScore) {
-            cout << "testing game over yay wow yay score is being recorded\n";
+        if (game.gameOver && canRecordScore) //game is over means you can view the leaderboard
+        {
+           // cout << "testing game over yay wow yay score is being recorded\n";
             leaderboard.open("leaderboard.txt", ios::app);
             leaderboard << game.score << "\n";
             leaderboard.close();
 
-            ifstream file("leaderboard.txt");
+            ifstream file("leaderboard.txt"); //getting the text file / info inside it 
             if (!file.is_open()) {
-                cerr << "Error: Unable to open file.";
+                cerr << "Error: Unable to open file."; //Incase it is unable to be found or corrupt it outputs error
                 return 1;
             }
             int j;
 
+            //changing leader board positions based on score using selection sort (?) ask katie about this?? 
             while (file >> j) {
                 lbScores.push_back(j);
             }
@@ -96,10 +98,10 @@ int main()
             }
 
 
-            readyToDraw = true;
-            if (readyToDraw) {
+          //  readyToDraw = true;
+           // if (readyToDraw) {
                 
-            }
+          //  }
            
 
             for (int i = 0; i < lbScores.size(); i++) {
@@ -111,7 +113,7 @@ int main()
             canRecordScore = false;
             
         }
-        if (game.gameOver && readyToDraw)
+        if (game.gameOver && readyToDraw) //actual display for thje leaderboard
         {
             DrawRectangleRounded({ 75, 50, 350, 500 }, 0.3, 6, cyan);
 
@@ -140,3 +142,4 @@ int main()
 
     CloseWindow();
 }
+

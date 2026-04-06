@@ -2,9 +2,8 @@
 
 class Position
 {
-//double check tutorial video to describe this better 
 public:
-    Position(int row, int column);
+    Position(int row, int column); //establushing positions in row and column 
     int row;
     int column;
 };

@@ -14,7 +14,7 @@ Game::Game() //constructor
     gameOver = false;
     score = 0;
     InitAudioDevice();
-    PlayMusicStream(music);
+   // PlayMusicStream(music); If we want background music 
     rotateSound = LoadSound("RotatePop.wav");
     clearSound = LoadSound("ClearPop.mp3");
     Texture2D bog = LoadTexture("Bog.png");
@@ -22,6 +22,7 @@ Game::Game() //constructor
 
 Game::~Game() //destructor
 {
+    //deleting all blocks and pointers to blocks 
     delete currentBlock;
     delete nextBlock;
     for (Block* b : blocks)
@@ -29,15 +30,15 @@ Game::~Game() //destructor
         delete b;
     }
     blocks.clear();
-
     
+    //unloading audio 
     UnloadSound(rotateSound);
     UnloadSound(clearSound);
     UnloadMusicStream(music);
     CloseAudioDevice();
 }
 
-Block* Game::GetRandomBlock()
+Block* Game::GetRandomBlock() //Getting the random block from the pointer pointing to the block array
 {
     if (blocks.empty())
     {
@@ -53,11 +54,12 @@ Block* Game::GetRandomBlock()
 
 vector <Block*> Game::GetAllBlocks()
 {
+    //Creates an instance of different bubble blocks for the pointer to access properly 
     return { new IBubbles(), new JBubbles(), new LBubbles(), new OBubbles(), new SBubbles(), new TBubbles(), new ZBubbles() };
 }
 
 
-void Game::Draw()
+void Game::Draw() //Drawing the varibles to play the game; the grid and what the current block is
 {
     grid.Draw();
 	DrawTexture(bog, 0, 0, WHITE);
@@ -76,7 +78,7 @@ void Game::Draw()
     }
 }
 
-void Game::HandleInput()
+void Game::HandleInput() //defining how the bubble blocks move 
 {
     int keyPressed = GetKeyPressed();
     if (gameOver && keyPressed != 0)
@@ -105,15 +107,18 @@ void Game::HandleInput()
 
 void Game::MoveBlockLeft()
 {
-    if (!gameOver)
+    if (!gameOver) //checks if game isnt over
     {
-        currentBlock->Move(0, -1);
-        if (IsBlockOutside() || BlockFits() == false)
+        currentBlock->Move(0, -1); //If the game isnt over than the current blocks gets moved now by 1 
+        if (IsBlockOutside() || BlockFits() == false) 
         {
             currentBlock->Move(0, 1);
+            //If the block is outside or doesnt fit, the block stays/is "moved" back in the last valid location
         }
     }
 }
+
+//The logic above defined for MoveBlockleft is the same for MoveBlockRight and MoveBlockDown
 
 void Game::MoveBlockRight()
 {
@@ -140,7 +145,7 @@ void Game::MoveBlockDown()
     }
 }
 
-bool Game::IsBlockOutside()
+bool Game::IsBlockOutside() // Checks if the block is outside the defined grid 
 {
     vector<Position> tiles = currentBlock->GetCellPositions();
     for (Position item : tiles)
@@ -153,7 +158,7 @@ bool Game::IsBlockOutside()
     return false;
 }
 
-void Game::RotateBlock()
+void Game::RotateBlock() //calls the rotate functions if it can be rotated or undo if it can't + plays sound when it can 
 {
     if (!gameOver)
     {
@@ -197,9 +202,9 @@ void Game::LockBlock()
     }
 }
 
-bool Game::BlockFits()
+bool Game::BlockFits() // checking if block fits
 {
-    std::vector<Position> tiles = currentBlock->GetCellPositions();
+    vector<Position> tiles = currentBlock->GetCellPositions();
     for (Position item : tiles)
     {
         if (grid.IsCellEmpty(item.row, item.column) == false)

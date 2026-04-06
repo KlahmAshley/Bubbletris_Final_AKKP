@@ -12,7 +12,7 @@ Grid::Grid()//constrcutor
     colors = GetCellColors();
 }
 
-void Grid::Initialize()
+void Grid::Initialize()//Initalizing the size of the grid 
 {
     for (int row = 0; row < numRows; row++)
     {
@@ -23,7 +23,7 @@ void Grid::Initialize()
     }
 }
 
-void Grid::Print()
+/*void Grid::Print() //Just to check if its correct in console
 {
     for (int row = 0; row < numRows; row++)
     {
@@ -31,11 +31,12 @@ void Grid::Print()
         {
             cout << grid[row][column] << " ";
         }
-        cout << std::endl;
+        cout << endl;
     }
 }
+*/
 
-void Grid::Draw()
+void Grid::Draw() //Drawing the actual grid to the screen 
 {
     for (int row = 0; row < numRows; row++)
     {
@@ -47,7 +48,7 @@ void Grid::Draw()
     }
 }
 
-bool Grid::IsCellOutside(int row, int column)
+bool Grid::IsCellOutside(int row, int column) //parameters of the grid; what is outside and inside grid 
 {
     if (row >= 0 && row < numRows && column >= 0 && column < numCols)
     {
@@ -56,7 +57,7 @@ bool Grid::IsCellOutside(int row, int column)
     return true;
 }
 
-bool Grid::IsCellEmpty(int row, int column)
+bool Grid::IsCellEmpty(int row, int column) //Checking if each cell is empty 
 {
     if (grid[row][column] == 0)
     {
@@ -65,7 +66,9 @@ bool Grid::IsCellEmpty(int row, int column)
     return false;
 }
 
-int Grid::ClearFullRows()
+int Grid::ClearFullRows() 
+// calling other functions that are checking if the row of the grid is full of bubble blocks
+// and if so it clears them and move the next rows down 1 
 {
     int completed = 0;
     for (int row = numRows - 1; row >= 0; row--)
@@ -83,7 +86,7 @@ int Grid::ClearFullRows()
     return completed;
 }
 
-bool Grid::IsRowFull(int row)
+bool Grid::IsRowFull(int row)//actual function doing the checking if the row of the grid is full
 {
     for (int column = 0; column < numCols; column++)
     {
@@ -95,7 +98,7 @@ bool Grid::IsRowFull(int row)
     return true;
 }
 
-void Grid::ClearRow(int row)
+void Grid::ClearRow(int row)//actual function doing the clearing of the row 
 {
     for (int column = 0; column < numCols; column++)
     {
@@ -103,7 +106,7 @@ void Grid::ClearRow(int row)
     }
 }
 
-void Grid::MoveRowDown(int row, int numRows)
+void Grid::MoveRowDown(int row, int numRows) //actual function doing the moving of rows down 
 {
     for (int column = 0; column < numCols; column++)
     {
