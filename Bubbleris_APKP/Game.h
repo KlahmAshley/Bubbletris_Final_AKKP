@@ -23,7 +23,6 @@ private:
     //functions for moving blocks
     void MoveBlockLeft();
     void MoveBlockRight();
-
     bool IsBlockOutside(); //checking if block is outside of the grid or not
     void RotateBlock(); //rotate block
     void LockBlock(); //locking block in place once it touches the blocks below it
@@ -40,5 +39,7 @@ private:
     //sound effects
     Sound rotateSound;
     Sound clearSound;
+   // Sound bSound;
+   // Sound sSound;
     Texture2D bog = LoadTexture("Bog.png"); //bog the bubble dog :)
 };
