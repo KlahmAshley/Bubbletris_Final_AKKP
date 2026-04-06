@@ -98,11 +98,7 @@ int main()
             }
 
 
-          //  readyToDraw = true;
-           // if (readyToDraw) {
-                
-          //  }
-           
+            readyToDraw = true;
 
             for (int i = 0; i < lbScores.size(); i++) {
                 cout << "Score: " << lbScores[i] << "\n";

@@ -9,7 +9,7 @@ class Game
 {
 public:
     Game(); //constructor
-    ~Game(); //destructor
+    virtual ~Game(); //destructor
     void Draw(); //handles drawing everything onscreen
     void HandleInput(); //input manager
     void MoveBlockDown(); //moving a block down when you have it in position already
@@ -31,7 +31,7 @@ private:
     void Reset(); //resets the board after a game over
     void UpdateScore(int linesCleared, int moveDownPoints); //updates score when row is cleared
     Grid grid;
-    //block variables and pointers (note to delete later: i moved a few lines down here for organization purposes)
+    //block variables and pointers
     Block* GetRandomBlock();
     vector<Block*> GetAllBlocks();
     vector<Block*> blocks;

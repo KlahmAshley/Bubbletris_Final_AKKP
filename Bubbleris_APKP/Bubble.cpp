@@ -1,4 +1,5 @@
 #include "Bubble.h"
+
 #include <vector>
 using namespace std;
 
@@ -64,6 +65,6 @@ void Block::UndoRotation() //Defining function to undo rotation
 
 Block::~Block()//destructor
 {
-
+    
 }   
 

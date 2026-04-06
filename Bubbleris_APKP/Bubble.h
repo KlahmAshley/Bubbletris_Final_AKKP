@@ -20,6 +20,7 @@ public:
     void UndoRotation();
 
     int bubbleID; //id for the type of bubble group
+    //int* IDptr = &bubbleID;
     map <int, vector<Position>> cells; //array of cells
 
 private:
@@ -29,5 +30,6 @@ private:
     //offsets for spaces within the grid
     int rowOffset; 
     int columnOffset;
+
 };
 
