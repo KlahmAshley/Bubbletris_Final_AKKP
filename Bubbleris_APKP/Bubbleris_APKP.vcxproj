@@ -123,8 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="Blocks.cpp" />
+    <ClCompile Include="Bubble.cpp" />
+    <ClCompile Include="Bubbles.cpp" />
     <ClCompile Include="Colors.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -135,7 +135,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Block.h" />
+    <ClInclude Include="Bubble.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grid.h" />
