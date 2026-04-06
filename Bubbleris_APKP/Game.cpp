@@ -15,7 +15,8 @@ Game::Game() //constructor
     gameOver = false;
     score = 0;
     InitAudioDevice();
-   // PlayMusicStream(music); If we want background music 
+    music = LoadMusicStream("MusicLoop.wav");
+    PlayMusicStream(music); //If we want background music 
     rotateSound = LoadSound("RotatePop.wav");
     clearSound = LoadSound("ClearPop.mp3");
    // bSound = LoadSound("Bubblesound1");

@@ -25,18 +25,19 @@ int main()
 {
     ofstream leaderboard;
     vector<int> lbScores;
-    
+
     bool swapped;
     //drawing the game window, setting target FPS and loading font
     InitWindow(500, 620, "BUBBLETRIS - AKKP");
     SetTargetFPS(60);
 	Font font = LoadFont("BubbleFont.ttf");
+    Texture2D McGee = LoadTexture("LeaderBoardFloaty.png");
 
     Game game = Game();
 
     while (!WindowShouldClose())
     {
-       // UpdateMusicStream(game.music);
+        UpdateMusicStream(game.music);
         game.HandleInput();
         //
         if (EventTriggered(0.4)) //Time between moving block down over time 
@@ -111,16 +112,18 @@ int main()
         }
         if (game.gameOver && readyToDraw) //actual display for thje leaderboard
         {
+ 
             DrawRectangleRounded({ 75, 50, 350, 500 }, 0.3, 6, cyan);
 
             DrawRectangleRounded({ 85, 60, 330, 480 }, 0.3, 6, red);
             DrawTextEx(font, "GAME OVER!", { 175, 75 }, 38, 2, WHITE);
             DrawTextEx(font, "LEADERBOARD:", { 155, 115 }, 38, 2, WHITE);
-            DrawTextEx(font, TextFormat("#1 : %i", lbScores[0]), {155, 150}, 38, 2, WHITE);
-            DrawTextEx(font, TextFormat("#2 : %i", lbScores[1]), { 155, 200 }, 38, 2, WHITE);
-            DrawTextEx(font, TextFormat("#3 : %i", lbScores[2]), { 155, 250 }, 38, 2, WHITE);
-            DrawTextEx(font, TextFormat("#4 : %i", lbScores[3]), { 155, 300 }, 38, 2, WHITE);
-            DrawTextEx(font, TextFormat("#5 : %i", lbScores[4]), { 155, 350 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#1 : %i", lbScores[0]), { 100, 150}, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#2 : %i", lbScores[1]), { 100, 200 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#3 : %i", lbScores[2]), { 100, 250 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#4 : %i", lbScores[3]), { 100, 300 }, 38, 2, WHITE);
+            DrawTextEx(font, TextFormat("#5 : %i", lbScores[4]), { 100, 350 }, 38, 2, WHITE);
+            DrawTexture(McGee, 0, 0, WHITE);
 
             
 
