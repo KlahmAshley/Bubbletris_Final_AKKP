@@ -16,6 +16,7 @@ extern const Color blue;
 extern const Color lightBlue;
 extern const Color darkBlue;
 extern const Color greyBlue;
+extern const Color pink;
 
 //Getter function for the colours
 vector <Color> GetCellColors();

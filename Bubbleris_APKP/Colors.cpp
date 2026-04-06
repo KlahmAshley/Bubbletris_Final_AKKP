@@ -15,10 +15,11 @@ const Color cyan = { 171, 245, 255, 255 };
 const Color blue = { 174, 171, 255, 255 };
 const Color lightBlue = { 171, 198, 255, 255 };
 const Color darkBlue = {108, 100, 219, 255 };
-const Color greyBlue = { 177, 214, 277 };
+const Color greyBlue = { 177, 214, 227, 255 };
+const Color pink = { 212, 142, 199, 255 };
 
 vector <Color> GetCellColors()
 {
     //Function that returns all of the colours so a different file can use them
-    return { darkGrey, green, red, orange, yellow, purple, cyan, blue, greyBlue };
+    return { darkGrey, green, red, orange, yellow, purple, cyan, blue, greyBlue, pink };
 }

@@ -115,7 +115,7 @@ int main()
  
             DrawRectangleRounded({ 75, 50, 350, 500 }, 0.3, 6, cyan);
 
-            DrawRectangleRounded({ 85, 60, 330, 480 }, 0.3, 6, red);
+            DrawRectangleRounded({ 85, 60, 330, 480 }, 0.3, 6, pink);
             DrawTextEx(font, "GAME OVER!", { 175, 75 }, 38, 2, WHITE);
             DrawTextEx(font, "LEADERBOARD:", { 155, 115 }, 38, 2, WHITE);
             DrawTextEx(font, TextFormat("#1 : %i", lbScores[0]), { 100, 150}, 38, 2, WHITE);
