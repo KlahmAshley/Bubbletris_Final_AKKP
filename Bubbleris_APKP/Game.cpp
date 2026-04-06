@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <random>
 #include <vector>
+#include "Audio.h"
 
 using namespace std;
 
@@ -17,6 +18,9 @@ Game::Game() //constructor
    // PlayMusicStream(music); If we want background music 
     rotateSound = LoadSound("RotatePop.wav");
     clearSound = LoadSound("ClearPop.mp3");
+   // bSound = LoadSound("Bubblesound1");
+   // sSound = LoadSound("Bubblesound2");
+
     Texture2D bog = LoadTexture("Bog.png");
 }
 
@@ -257,3 +261,59 @@ void Game::UpdateScore(int linesCleared, int moveDownPoints)
     //adding extra to the score depending on how many points from moving down you obtained
     score += moveDownPoints;
 }
+
+
+
+BubbleAudio :: BubbleAudio()
+{
+    bSound = LoadSound("Bubblesound1");
+    sSound = LoadSound("Bubblesound2");
+
+}
+
+BubbleAudio :: ~BubbleAudio()
+{
+    UnloadSound(bSound);
+    UnloadSound(sSound);
+}
+
+
+class SpecialBubble : public BubbleAudio 
+{
+public:
+   void sound() override
+    {
+       PlaySound(sSound);
+    }
+
+};
+
+
+/*
+class OtherBubble : public BubbleAudio
+{
+public:
+    virtual void sound() override
+    {
+        PlaySound(bSound);
+    }
+
+};
+
+
+int main()
+{
+      BubbleAudio* bAuds;
+    // BubbleAudio* bAudo;
+
+   SpecialBubble sAud;
+   //  OtherBubble oAud;
+
+     bAuds = &sAud;
+    //  bAudo = &oAud;
+//
+     bAuds->sound();
+    //  bAudo->sound();
+}
+
+*/
