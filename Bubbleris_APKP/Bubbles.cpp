@@ -16,6 +16,8 @@ public:
         cells[3] = { Position(0, 0), Position(0, 1), Position(1, 1), Position(2, 1) };
         Move(0, 3); 
     }
+    //bubbleID stores the ID number of each bubble group for ease of calling + determines the bubble colour 
+    
 };
 //Logic commented in LBubbles are the same for JBubbles, IBubbles, SBubbles, TBubbles and ZBubbles 
 
@@ -53,8 +55,8 @@ class OBubbles : public Block
 public:
     OBubbles()
     {
-        //Rotation doesnt change its positions as this bubble set is square shaped therefore only 1 shape in array
         bubbleID = 4;
+        //Rotation doesnt change its positions as this bubble set is square shaped therefore only 1 shape in array
         cells[0] = { Position(0, 0), Position(0, 1), Position(1, 0), Position(1, 1) }; 
         Move(0, 4);
     }
@@ -100,4 +102,5 @@ public:
         cells[3] = { Position(0, 1), Position(1, 0), Position(1, 1), Position(2, 0) };
         Move(0, 3);
     }
+
 };

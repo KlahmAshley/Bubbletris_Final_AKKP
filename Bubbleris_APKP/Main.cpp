@@ -26,7 +26,6 @@ int main()
     ofstream leaderboard;
     vector<int> lbScores;
 
-    bool swapped;
     //drawing the game window, setting target FPS and loading font
     InitWindow(500, 620, "BUBBLETRIS - AKKP");
     SetTargetFPS(60);
@@ -64,7 +63,7 @@ int main()
         
         if (game.gameOver && canRecordScore) //game is over means you can view the leaderboard
         {
-           // cout << "testing game over yay wow yay score is being recorded\n";
+            //Writing score to a .txt file in order to save it
             leaderboard.open("leaderboard.txt", ios::app);
             leaderboard << game.score << "\n";
             leaderboard.close();
@@ -74,12 +73,13 @@ int main()
                 cerr << "Error: Unable to open file."; //Incase it is unable to be found or corrupt it outputs error
                 return 1;
             }
-            int j;
 
-            //changing leader board positions based on score using selection sort (?) ask katie about this?? 
+            //Taking all of the data in the .txt file and writing it to a vector array
+            int j;
             while (file >> j) {
                 lbScores.push_back(j);
             }
+            //selection sort to organize all of the values in the array in descending order
             int temp;
             int n = lbScores.size();
             for (int j = 0; j < n - 1; j++) {
@@ -91,9 +91,10 @@ int main()
                         temp = i;
                     }                    
                 }
-                swap(lbScores.at(j), lbScores.at(temp));
+                swap(lbScores.at(j), lbScores.at(temp)); //swappp
             }
 
+            //if the size of the array is greater than 5, erase unneeded values
             if (lbScores.size() > 5) {
                 lbScores.erase(lbScores.begin() + 5, lbScores.end());
             }
@@ -101,17 +102,19 @@ int main()
 
             readyToDraw = true;
 
+            //printing to the console to make sure that everything is working
             for (int i = 0; i < lbScores.size(); i++) {
                 cout << "Score: " << lbScores[i] << "\n";
             }
             
-            
+            //closing file and exiting loop
             file.close();
             canRecordScore = false;
             
         }
-        if (game.gameOver && readyToDraw) //actual display for thje leaderboard
+        if (game.gameOver && readyToDraw) //actual display for the leaderboard
         {
+            //Drawing everything for the leaderboard here, using rectangles and lots of text + a cute texture
  
             DrawRectangleRounded({ 75, 50, 350, 500 }, 0.3, 6, cyan);
 
@@ -128,6 +131,7 @@ int main()
             
 
         }
+        //once the game is restarted, array is cleared and bools permitting these functions to work properly are reset
         if (!game.gameOver) {
             canRecordScore = true;
             lbScores.clear();
